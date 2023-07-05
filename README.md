@@ -3,7 +3,7 @@
 ``` shell
 git clone git@github.com:JaeJunday/Weather-for-iTerm.git
 cd Weather-for-iTerm
-make install
+make
 ```
 ## How to play
 ``` shell
