@@ -1,5 +1,5 @@
 NAME 	= 	weather
-SRCS	= 	main.cpp
+SRCS	= 	srcs/main.cpp
 CXX 	= 	c++
 
 # LINK = curl -sSL 'wttr.in/Seoul?m2&lang=ko' 
@@ -7,8 +7,8 @@ CXX 	= 	c++
 all 	: 	$(NAME)
 $(NAME)	:
 	$(CXX) $(SRCS) -o $(NAME)
-	chmod +x setting.sh
-	bash setting.sh
+	chmod +x srcs/setting.sh
+	bash srcs/setting.sh
 
 clean	:
 	rm -rf $(HOME)/.config/$(NAME)
