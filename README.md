@@ -2,8 +2,9 @@
 ## How to install
 ``` shell
 git clone git@github.com:JaeJunday/Weather-for-iTerm.git
-cd Weather-for-iTerm.git
-make
+```
+``` shell
+cd Weather-for-iTerm.git && make
 ```
 ## How to play
 ``` shell
