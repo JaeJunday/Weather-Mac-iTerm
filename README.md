@@ -4,7 +4,7 @@
 git clone git@github.com:JaeJunday/Weather-for-iTerm.git
 cd Weather-for-iTerm
 make
-cd ../ && rm -rf Weather-for-iTerm
+cd ../ && rm -rf Weather-for-iTerm/
 ```
 ## How to play
 ``` shell
