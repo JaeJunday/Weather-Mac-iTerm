@@ -6,7 +6,7 @@ CXX 	= 	c++
 
 all 	: 	$(NAME)
 $(NAME)	:
-	$(CXX) $(SRCS) -o $(NAME)
+	@$(CXX) $(SRCS) -o $(NAME)
 	@echo "$(B_Cyan) Install Weather Program $(Reset)"
 	@make load
 	@chmod +x srcs/setting.sh
