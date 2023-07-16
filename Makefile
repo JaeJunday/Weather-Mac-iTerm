@@ -1,28 +1,42 @@
-NAME 	= 	weather
-SRCS	= 	srcs/main.cpp
-CXX 	= 	c++
+NAME = weather
+SRCS = srcs/main.cpp
+CXX = c++
 
-# LINK = curl -sSL 'wttr.in/Seoul?m2&lang=ko' 
+# Define the paths
+CONFIG_DIR = $(HOME)/.config
+INSTALL_PATH = $(CONFIG_DIR)/$(NAME)
 
-all 	: 	$(NAME)
-$(NAME)	:
-	@$(CXX) $(SRCS) -o $(NAME)
+SET_SH = srcs/setting.sh
+CLEAR_SH = srcs/clear_path.sh
+
+all: $(INSTALL_PATH)
+
+$(INSTALL_PATH): $(NAME)
 	@echo "$(B_Cyan) Install Weather Program $(Reset)"
 	@make load
-	@chmod +x srcs/setting.sh
-	@bash srcs/setting.sh
-	@echo "[ Please Input Command ]\n\n > $(B_Yellow)weather\n$(Reset)"
+	@chmod +x $(SET_SH)
+	@chmod +x $(CLEAR_SH)
+	@bash $(SET_SH) $(INSTALL_PATH)
+	@echo "[ Please Input Command ]\n\n > $(B_Yellow)$(NAME) [ 지역 ] [ 언어 ]\n$(Reset)"
 	@exec zsh
 
-clean	:
-	rm -rf $(HOME)/.config/$(NAME)
+$(NAME):
+	@$(CXX) $(SRCS) -o $(NAME)
 
-.PHONY	: all clean load
+clean:
+	@rm -rf $(NAME) $(INSTALL_PATH)
+	@bash $(CLEAR_SH)
+
+re: clean 
+	make all
+
+.PHONY: all clean load re
+
 
 LOAD 		:= 	------------------< 🌈 Weather >-------------------
 N 			:= 	$(shell echo $(words $(LOAD)))
 load		:	
-				@for i in $$(seq 0 2 100); do\
+				@for i in $$(seq 0 4 100); do\
 					if [ $$i -eq 100 ]; then\
 						printf "\r${B_Green}[%-50s] ${B_Yellow}%d%% ${Reset}" "$$(echo '$(LOAD)' | cut -b 1-$$(($$i/2+1)))" "$$i";\
 					else\
