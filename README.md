@@ -1,5 +1,5 @@
 # Weather-for-iTerm
-## How to install
+## Quick Start
 ``` shell
 git clone git@github.com:JaeJunday/Weather-for-iTerm.git
 cd Weather-for-iTerm
