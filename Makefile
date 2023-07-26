@@ -17,7 +17,8 @@ $(INSTALL_PATH): $(NAME)
 	@chmod +x $(SET_SH)
 	@chmod +x $(CLEAR_SH)
 	@bash $(SET_SH) $(INSTALL_PATH)
-	@echo "[ Please Input Command ]\n\n > $(B_Yellow)$(NAME) [ 지역 ] [ 언어 ]\n$(Reset)"
+	@echo "[ Please Input Command ]\n\n > $(B_Yellow)$(NAME) [location] \n$(Reset)"
+	@echo " > $(B_Yellow)$(NAME) all \n$(Reset)"
 	@exec zsh
 
 $(NAME):

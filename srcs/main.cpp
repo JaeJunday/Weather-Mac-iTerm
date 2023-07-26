@@ -1,23 +1,40 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <sstream>
 
-#define LOCATION 2
-#define LANGUAGE 3
+#define OPTION 2
+
+using namespace std;
 
 int main(int ac, char **av)
 {
-    std::string location = "Seoul"; // Default location
-    std::string language = "ko";   // Default language
+    string location = "Seoul"; // Default location
+    string language = "ko";   // Default language
+    string option = "";
+    if (ac >= OPTION)
+    {
+        string tmp = av[1];
+        if (tmp == "all")
+            option = "v2.";
+        else
+            location = tmp;
+    }
+    stringstream result;
 
-    if (ac >= LOCATION)
-        location = av[1];
+// Result Command shift
+    result << "curl "; 
+// Curl Debug option
+    result << "-sSL ";
+// Api call
+    result << "'";
+    result << option;
+    result << "wttr.in/";
+    result << location;
+    result << "' | sed '$d'";
 
-    if (ac >= LANGUAGE)
-        language = av[2];
-
-    std::string curl_command = "curl -sSL 'wttr.in/" + location + "?m2&lang=" + language + "' | sed '$d'";
-    system(curl_command.c_str());
-
+// std::cout << result.str() << std::endl;
+// System call
+    system(result.str().c_str());
     return 0;
 }
