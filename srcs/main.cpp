@@ -1,11 +1,33 @@
-#include <cstdlib>
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include <sstream>
+#include <fstream>
 
 #define OPTION 2
+#define ON "on"
+#define OFF "off"
 
 using namespace std;
+
+void makeStatus(string tmp)
+{
+    string mode;
+    if (tmp == ON)
+        mode = "craeteStatus.sh";
+    else if (tmp == OFF)
+        mode = "removeStatus.sh";
+
+    stringstream path;
+    path << "bash ";
+    path << "$HOME/";
+    path << ".config/";
+    path << mode;
+
+    // cout << path.str() << endl;
+    system(path.str().c_str());
+    exit(0);
+}
 
 int main(int ac, char **av)
 {
@@ -17,11 +39,13 @@ int main(int ac, char **av)
         string tmp = av[1];
         if (tmp == "all")
             option = "v2.";
+        else if (tmp == "on" || tmp == "off")
+            makeStatus(tmp);
         else
             location = tmp;
     }
-    stringstream result;
 
+    stringstream result;
 // Result Command shift
     result << "curl "; 
 // Curl Debug option

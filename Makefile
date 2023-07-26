@@ -33,7 +33,6 @@ re: clean
 
 .PHONY: all clean load re
 
-
 LOAD 		:= 	------------------< 🌈 Weather >-------------------
 N 			:= 	$(shell echo $(words $(LOAD)))
 load		:	
