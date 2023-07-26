@@ -6,6 +6,7 @@ Red=$'\033[0;31m'
 Green=$'\033[0;32m'
 Yellow=$'\033[0;33m'
 Reset=$'\033[0m'
+Cyan=$'\033[0;36m'
 
 BANNER="$(  
 printf $DELETE
@@ -54,9 +55,11 @@ percentage=$(echo "$df_output" | awk '{sub(/%$/, "", $5); print $5}')
 
 # 컬러 선택
 color=""
-if (( $(awk 'BEGIN {print ('"$percentage"' < 70)}') )); then
+if (( $(awk 'BEGIN {print ('"$percentage"' < 50)}') )); then
+    color=$Cyan  # 초록색
+elif (( $(awk 'BEGIN {print ('"$percentage"' < 65)}') )); then
     color=$Green  # 초록색
-elif (( $(awk 'BEGIN {print ('"$percentage"' < 90)}') )); then
+elif (( $(awk 'BEGIN {print ('"$percentage"' < 80)}') )); then
     color=$Yellow
 else
     color=$Red
