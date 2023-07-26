@@ -8,6 +8,9 @@ INSTALL_PATH = $(CONFIG_DIR)/$(NAME)
 
 SET_SH = srcs/setting.sh
 CLEAR_SH = srcs/clear_path.sh
+CLEAR_CASH = srcs/clear_cache.sh
+SET_STATUS = srcs/craete_status.sh
+RM_STATUS = srcs/remove_status.sh
 
 all: $(INSTALL_PATH)
 
@@ -16,6 +19,9 @@ $(INSTALL_PATH): $(NAME)
 	@make load
 	@chmod +x $(SET_SH)
 	@chmod +x $(CLEAR_SH)
+	@chmod +x $(CLEAR_CASH)
+	@chmod +x $(SET_STATUS)
+	@chmod +x $(RM_STATUS)
 	@bash $(SET_SH) $(INSTALL_PATH)
 	@echo "[ Please Input Command ]\n\n > $(B_Yellow)$(NAME) [location] \n$(Reset)"
 	@echo " > $(B_Yellow)$(NAME) all \n$(Reset)"

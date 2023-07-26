@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # 이스케이프 컬러 시퀀스 
 DELETE=$'\033[1A\033[K'
