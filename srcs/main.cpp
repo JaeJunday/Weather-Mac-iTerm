@@ -14,9 +14,9 @@ void makeStatus(string tmp)
 {
     string mode;
     if (tmp == ON)
-        mode = "craeteStatus.sh";
+        mode = "create_status.sh";
     else if (tmp == OFF)
-        mode = "removeStatus.sh";
+        mode = "remove_status.sh";
 
     stringstream path;
     path << "bash ";
