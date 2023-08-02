@@ -95,9 +95,9 @@ percentage_g=$(echo "$df_graph" | awk '{sub(/%$/, "", $5); print $5}')
 usage2=$(awk -v total=$total_g -v used=$used_g 'BEGIN {printf "%.0f", used / total * 25}')
 for ((i=0; i<25; i++)); do
     if ((i < usage2)); then
-        graph+="$color.$Reset"
+        graph+="$color $Reset"
     else
-        graph+="$B_BG_BLACK.$Reset"
+        graph+="$B_BG_BLACK $Reset"
     fi
 done
 
