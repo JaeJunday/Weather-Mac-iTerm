@@ -5,7 +5,7 @@ DELETE=$'\033[1A\033[K'
 Red=$'\033[0;31m'
 Green=$'\033[0;32m'
 Yellow=$'\033[0;33m'
-Reset=$'\033[0m'
+RESET=$'\033[0m'
 Cyan=$'\033[0;36m'
 
 BG_BLACK=$'\033[40m'
@@ -69,40 +69,40 @@ df_output=$(df -h | tail -n 1)
 # 필요한 정보 추출
 total=$(echo "$df_output" | awk '{print $2}')
 used=$(echo "$df_output" | awk '{print $3}')
-percentage=$(echo "$df_output" | awk '{sub(/%$/, "", $5); print $5}')
+PERCENTAGE=$(echo "$df_output" | awk '{sub(/%$/, "", $5); print $5}')
 
 # 컬러 선택
 color=""
-if (( $(awk 'BEGIN {print ('"$percentage"' < 50)}') )); then
+if (( $(awk 'BEGIN {print ('"$PERCENTAGE"' < 50)}') )); then
     color=$B_BG_CYAN  # 초록색
-elif (( $(awk 'BEGIN {print ('"$percentage"' < 65)}') )); then
+elif (( $(awk 'BEGIN {print ('"$PERCENTAGE"' < 65)}') )); then
     color=$B_BG_GREEN  # 초록색
-elif (( $(awk 'BEGIN {print ('"$percentage"' < 80)}') )); then
+elif (( $(awk 'BEGIN {print ('"$PERCENTAGE"' < 80)}') )); then
     color=$B_BG_YELLOW
 else
     color=$B_BG_RED
 fi
 
 # df -m 그래프계산값을 위한 정보 출력
-df_graph=$(df -m | tail -n 1)
+df_GRAPH=$(df -m | tail -n 1)
 
 # 필요한 정보 추출
-total_g=$(echo "$df_graph" | awk '{print $2}')
-used_g=$(echo "$df_graph" | awk '{print $3}')
-percentage_g=$(echo "$df_graph" | awk '{sub(/%$/, "", $5); print $5}')
+total_g=$(echo "$df_GRAPH" | awk '{print $2}')
+used_g=$(echo "$df_GRAPH" | awk '{print $3}')
+PERCENTAGE_g=$(echo "$df_GRAPH" | awk '{sub(/%$/, "", $5); print $5}')
 
 # 막대 그래프 생성
-usage2=$(awk -v total=$total_g -v used=$used_g 'BEGIN {printf "%.0f", used / total * 25}')
+USAGE2=$(awk -v total=$total_g -v used=$used_g 'BEGIN {printf "%.0f", used / total * 25}')
 for ((i=0; i<25; i++)); do
-    if ((i < usage2)); then
-        graph+="$color $Reset"
+    if ((i < USAGE2)); then
+        GRAPH+="$color $RESET"
     else
-        graph+="$B_BG_BLACK $Reset"
+        GRAPH+="$B_BG_BLACK $RESET"
     fi
 done
 
 # 출력
 printf $DELETE
-printf "$graph "
-printf "$Reset$percentage\e[0m %%\n"
+printf "$GRAPH "
+printf "$RESET$PERCENTAGE\e[0m %%\n"
 # curl --max-time 3 'wttr.in/seoul?format=3'
