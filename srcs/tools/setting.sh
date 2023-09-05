@@ -5,7 +5,7 @@ if [ ! -f "$HOME/.config/weather" ]; then
     chmod +x weather
     mv weather $HOME/.config/	
     echo "# weather path" >> $HOME/.zshrc
-    echo "export PATH='$PATH:$HOME/.config/'" >> $HOME/.zshrc 
+    echo 'export PATH="$HOME/.config/:$PATH"' >> $HOME/.zshrc 
     echo " " >> $HOME/.zshrc
     echo "# disk status" >> $HOME/.zshrc
     echo "bash ~/.config/clear_cache.sh" >> $HOME/.zshrc
