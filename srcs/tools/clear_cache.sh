@@ -7,6 +7,7 @@ Green=$'\033[0;32m'
 Yellow=$'\033[0;33m'
 RESET=$'\033[0m'
 Cyan=$'\033[0;36m'
+B_BLACK="\033[30m"
 
 BG_BLACK=$'\033[40m'
 BG_RED=$'\033[41m'
@@ -26,52 +27,26 @@ B_BG_CYAN=$'\033[106m'
 B_BG_WHITE=$'\033[107m'
 REVERSE=$'\033[7m'
 
-BANNER="$(  
-printf $DELETE
-cat << EOF
-║ █ █ ║ █ █ █ ║ █ █ ║
-║ █ █ ║ █ █ █ ║ █ █ ║
-║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║
-╚═╩═╩═╩═╩═╩═╩═╩═╩═╩═╝
-EOF
-)"
-
-TARGET=(
-  "Caches"
-  "ApplicationSupport/Code/Cache"
-  "ApplicationSupport/Code/CachedData"
-  "ApplicationSupport/Code/CachedExtensions"
-  "ApplicationSupport/Code/CachedExtensionVSIXs"
-  "ApplicationSupport/Code/Code Cache"
-  "ApplicationSupport/Slack/Cache"
-  "ApplicationSupport/Slack/CachedData"
-  "ApplicationSupport/Slack/Service Worker/CacheStorage"
-  "ApplicationSupport/Slack/Service Worker/ScriptCache"
-)
-
-
-
-# 출력 포맷 지정 
-function link_all_cache_dirs() {
-  for ((i = 0; i < ${#TARGET[@]}; i++)); do
-    rm -rf "$HOME/Library/${TARGET[$i]}"
-  done
-}
-
-#if [ ! -e "$FLAG" ]; then
-  #printf "\n$BANNER\n"
-  link_all_cache_dirs
-#fi
+rm -rf ${HOME}/Library/Application\ Support/Code/User/workspaceStorage
+rm -rf ${HOME}/Library/Application\ Support/Code/CachedExtensionVSIXs
+rm -rf ${HOME}/Library/Application\ Support/Code/CachedData
+rm -rf ${HOME}/Library/Application\ Support/Code/Cache
+rm -rf ${HOME}/Library/Caches
+rm -rf ${HOME}/Library/Application\ Support/discord/Cache
+rm -rf ${HOME}/Library/Application\ Support/Caches
+rm -rf ${HOME}/Library/Application\ Support/Slack/Cache
+rm -rf ${HOME}/Library/Application\ Support/discord/Code\ Cache
+rm -rf ${HOME}/Library/Application\ Support/Google/Chrome/Default/Service\ Worker/CacheStorage
+rm -rf ${HOME}/Library/Application\ Support/Google/Chrome/Default/Service\ Worker/ScriptCache
+rm -rf ${HOME}/Library/Application\ Support/Slack/Service\ Worker/CacheStorage
+rm -rf ${HOME}/Library/Containers/com.apple.Safari/Data/Library/Caches
+rm -rf ${HOME}/.Trash/*
 
 # df -h 명령어 실행 및 마지막 줄 추출
 df_output=$(df -h | tail -n 1)
 
-# 필요한 정보 추출
-total=$(echo "$df_output" | awk '{print $2}')
-used=$(echo "$df_output" | awk '{print $3}')
-PERCENTAGE=$(echo "$df_output" | awk '{sub(/%$/, "", $5); print $5}')
-
 # 컬러 선택
+PERCENTAGE=$(echo "$df_output" | awk '{sub(/%$/, "", $5); print $5}')
 color=""
 if (( $(awk 'BEGIN {print ('"$PERCENTAGE"' < 50)}') )); then
     color=$B_BG_CYAN  # 초록색
@@ -83,10 +58,8 @@ else
     color=$B_BG_RED
 fi
 
-# df -m 그래프계산값을 위한 정보 출력
-df_GRAPH=$(df -m | tail -n 1)
-
 # 필요한 정보 추출
+df_GRAPH=$(df -m | tail -n 1)
 total_g=$(echo "$df_GRAPH" | awk '{print $2}')
 used_g=$(echo "$df_GRAPH" | awk '{print $3}')
 PERCENTAGE_g=$(echo "$df_GRAPH" | awk '{sub(/%$/, "", $5); print $5}')
@@ -104,5 +77,4 @@ done
 # 출력
 printf $DELETE
 printf "$GRAPH "
-printf "$RESET$PERCENTAGE\e[0m %%\n"
-# curl --max-time 3 'wttr.in/seoul?format=3'
+printf "$RESET$PERCENTAGE\e[0m %% $REVERSE$B_BLACK made by jaejkim $RESET\n"
