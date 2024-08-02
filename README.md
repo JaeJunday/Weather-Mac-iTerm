@@ -1,4 +1,4 @@
-# Weather-for-iTerm
+# iTermForecast
 ## Quick Start
 ``` shell
 git clone git@github.com:JaeJunday/Weather-for-iTerm.git
